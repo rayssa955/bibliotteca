@@ -91,18 +91,16 @@ def atualizaçao_tabela(disponivel, id_livro):
 
 #Apagar os livros
 
-def deletar_livros():
+def deletar_livros(id):
     try:
         conexao = sqlite3 .connect("biblioteca.db")
         cursor = conexao.cursor()
-        id = int(input("Digite o id do livros que deseja deletar: "))
         cursor.execute("DELETE FROM livros WHERE id = ?", (id,))
         conexao.commit()
         print("Livro removido com sucesso!")
     except Exception as error:
         #Caso ocorra algum erro no banco
         print(f"erro ao tentar remover livros {error}")
-deletar_livros()
     
 #Menu Interativo
 def menu():
