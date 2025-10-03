@@ -27,32 +27,32 @@ criando_tabela()
 
 #Criando Cadastro
 
-def cadastro_livro(titulo, autor, ano):
-    try:
-        conexao = sqlite3 .connect("biblioteca.db")
-        cursor = conexao.cursor()
-        cursor.execute("""
-            INSERT INTO livros (titulo, autor, ano, disponivel)
-            VALUES (?,?,?,?)                             
-            """,
-            (titulo, autor, ano, "sim")
-        )
-        conexao.commit()
+# def cadastro_livro(titulo, autor, ano):
+#     try:
+#         conexao = sqlite3 .connect("biblioteca.db")
+#         cursor = conexao.cursor()
+#         cursor.execute("""
+#             INSERT INTO livros (titulo, autor, ano, disponivel)
+#             VALUES (?,?,?,?)                             
+#             """,
+#             (titulo, autor, ano, "sim")
+#         )
+#         conexao.commit()
 
-    except Exception as error:
-        #Caso ocorra algum erro no banco
-        print(f"erro ao tentar cadastrar livro {error}")
-    finally:
-        #Sempre fechar a conexão
-        if conexao:
-            conexao.close()  
+#     except Exception as error:
+#         #Caso ocorra algum erro no banco
+#         print(f"erro ao tentar cadastrar livro {error}")
+#     finally:
+#         #Sempre fechar a conexão
+#         if conexao:
+#             conexao.close()  
            
 
-titulo = input("Digite o titulo do livro desejado: ").lower()
-autor = input("Digite o autor do livro: ").lower()
-ano = int(input("Digite o ano do livro: "))
+# titulo = input("Digite o titulo do livro desejado: ").lower()
+# autor = input("Digite o autor do livro: ").lower()
+# ano = int(input("Digite o ano do livro: "))
 
-cadastro_livro(titulo, autor, ano )
+# cadastro_livro(titulo, autor, ano )
 
 #Listagem de livros 
 
@@ -73,3 +73,33 @@ def listar_livros():
         if conexao:
             conexao.close()  
 listar_livros()
+
+
+#Atualização
+def atualizaçao_tabela(disponivel, id_livro):
+    try:
+        conexao = sqlite3 .connect("biblioteca.db")
+        cursor = conexao.cursor()
+        cursor.execute("""
+        UPDATE livros
+        SET  disponivel = ?
+        WHERE id = ?                             
+        """, (disponivel, id_livro)
+        )
+        conexao.commit()
+    except Exception as error:
+        #Caso ocorra algum erro no banco
+        print(f"erro ao tentar atualizar a lista {error}")
+    finally:
+        #Sempre fechar a conexão
+        if conexao:
+            conexao.close()
+
+
+disponivel = input("Tem o livro que deseja ? (sim ou não): ")
+id_livro = input("Digite o livro que deseja alterar: ")
+
+atualizaçao_tabela(disponivel, id_livro)
+
+
+#Apagar os livros
