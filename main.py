@@ -46,13 +46,6 @@ def cadastro_livro(titulo, autor, ano):
         #Sempre fechar a conexão
         if conexao:
             conexao.close()  
-           
-
-titulo = input("Digite o titulo do livro desejado: ").lower()
-autor = input("Digite o autor do livro: ").lower()
-ano = int(input("Digite o ano do livro: "))
-
-cadastro_livro(titulo, autor, ano )
 
 #Listagem de livros 
 
@@ -96,12 +89,6 @@ def atualizaçao_tabela(disponivel, id_livro):
             conexao.close()
 
 
-disponivel = input("Tem o livro que deseja ? (sim ou não): ")
-id_livro = input("Digite o livro que deseja alterar: ")
-
-atualizaçao_tabela(disponivel, id_livro)
-listar_livros()
-
 #Apagar os livros
 
 def deletar_livros():
@@ -118,7 +105,6 @@ def deletar_livros():
 deletar_livros()
     
 #Menu Interativo
-
 def menu():
     while True:
         print("1. Cadastrar livro")
@@ -142,11 +128,11 @@ def menu():
         elif opcao == "3":
             id_livro = input("Digite o ID do livro para atualizar: ")
             novo_status = input("Disponível (sim/não): ")
-            atualizar_tabela(novo_status, id_livro)
+            atualizaçao_tabela(novo_status, id_livro)
             print("Disponibilidade atualizada!")
         elif opcao == "4":
             id_livro = input("Digite o ID do livro que deseja remover: ")
-            remover_livro(id_livro)
+            deletar_livros(id_livro)
 
         elif opcao == "5":
             print("Saindo do sistema")
