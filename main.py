@@ -76,30 +76,44 @@ listar_livros()
 
 
 #Atualização
-def atualizaçao_tabela(disponivel, id_livro):
+# def atualizaçao_tabela(disponivel, id_livro):
+#     try:
+#         conexao = sqlite3 .connect("biblioteca.db")
+#         cursor = conexao.cursor()
+#         cursor.execute("""
+#         UPDATE livros
+#         SET  disponivel = ?
+#         WHERE id = ?                             
+#         """, (disponivel, id_livro)
+#         )
+#         conexao.commit()
+#     except Exception as error:
+#         #Caso ocorra algum erro no banco
+#         print(f"erro ao tentar atualizar a lista {error}")
+#     finally:
+#         #Sempre fechar a conexão
+#         if conexao:
+#             conexao.close()
+
+
+# disponivel = input("Tem o livro que deseja ? (sim ou não): ")
+# id_livro = input("Digite o livro que deseja alterar: ")
+
+# atualizaçao_tabela(disponivel, id_livro)
+# listar_livros()
+
+#Apagar os livros
+
+def deletar_livros():
     try:
         conexao = sqlite3 .connect("biblioteca.db")
         cursor = conexao.cursor()
-        cursor.execute("""
-        UPDATE livros
-        SET  disponivel = ?
-        WHERE id = ?                             
-        """, (disponivel, id_livro)
-        )
+        id = int(input("Digite o id do livros que deseja deletar: "))
+        cursor.execute("DELETE FROM livros WHERE id = ?", (id,))
         conexao.commit()
+        print("Livro removido com sucesso!")
     except Exception as error:
         #Caso ocorra algum erro no banco
-        print(f"erro ao tentar atualizar a lista {error}")
-    finally:
-        #Sempre fechar a conexão
-        if conexao:
-            conexao.close()
-
-
-disponivel = input("Tem o livro que deseja ? (sim ou não): ")
-id_livro = input("Digite o livro que deseja alterar: ")
-
-atualizaçao_tabela(disponivel, id_livro)
-
-
-#Apagar os livros
+        print(f"erro ao tentar remover livros {error}")
+deletar_livros()
+    
