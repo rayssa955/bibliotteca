@@ -54,4 +54,22 @@ ano = int(input("Digite o ano do livro: "))
 
 cadastro_livro(titulo, autor, ano )
 
+#Listagem de livros 
 
+def listar_livros():
+    try:
+        conexao = sqlite3 .connect("biblioteca.db")
+        cursor = conexao.cursor()
+        cursor.execute("SELECT * FROM livros")
+        for linha in cursor.fetchall():
+            print(f"ID: {linha [0]} | TITULO: {linha [1]} | AUTOR: {linha[2]} | ANO: {linha[3]} DISPONIVEL{linha[4]}")
+            print("-"*60)
+
+    except Exception as error:
+        #Caso ocorra algum erro no banco
+        print(f"erro ao tentar listar dados da biblioteca {error}")
+    finally:
+        #Sempre fechar a conexão
+        if conexao:
+            conexao.close()  
+listar_livros()
